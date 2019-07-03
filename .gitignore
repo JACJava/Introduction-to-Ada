@@ -3,3 +3,10 @@
 
 # Ada Library Information
 *.ali
+*.db
+*.db
+*.db-shm
+*.exe
+*.db
+*.db-wal
+*/obj/*.*

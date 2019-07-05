@@ -1,0 +1,58 @@
+with Ada.Text_IO;
+with Ada.Numerics.Elementary_Functions;
+
+procedure Main is
+
+   package TIO renames Ada.Text_IO;
+   package Math renames Ada.Numerics.Elementary_Functions;
+   type Suit is (Clubs, Diamonds, Hearts, Spades, No_Trumps);
+   Bid_Suit  : Suit := Hearts;
+   Valid_Bid : Boolean;
+   subtype Trick_Range is Integer range 1 .. 13;
+   Bid_Tricks     : Integer range 0 .. 13 := 6;
+   Black_Suit     : Boolean;
+   Black_Or_Minor : Boolean;
+   NS             : Integer               := 0;
+   Is_Even        : Boolean;
+   Square_Root    : Integer;
+
+begin
+-- Subtype membership
+   Valid_Bid := Bid_Tricks in Trick_Range;
+   Valid_Bid := (for some Bid in Trick_Range => Bid = Bid_Tricks);
+   if not Valid_Bid then
+      TIO.Put_Line ("The hand was passed out.");
+   end if;
+
+-- single literal membership
+   if No_Trumps not in Bid_Suit then
+      TIO.Put_Line ("No Trumps was not the bid.");
+   end if;
+
+-- Vertical Bar testing
+   Black_Suit     := Bid_Suit in Clubs | Spades;
+   Black_Or_Minor := Bid_Suit in Clubs .. Diamonds | Spades;
+   TIO.Put_Line
+     ("The suit was " &
+      (if Black_Suit then "Black" else "Diamonds, Hearts or No Trumps"));
+   TIO.Put_Line
+     ("The suit was " &
+      (if Black_Or_Minor then "Black or a Minor Suit"
+       else "Hearts,Spades or No Trumps"));
+
+   NS      := 2;
+   Is_Even := Bid_Tricks in NS * 1 | NS * 2 | NS * 3 | NS * 4 | NS * 5 | NS * 6;
+   if Is_Even then
+      TIO.Put_Line ("It's even");
+   else
+      TIO.Put_Line ("It's odd.");
+   end if;
+
+   for Test_Num in 2 .. 1000 loop
+      Square_Root := Integer (Math.Sqrt (Float (Test_Num)));
+      if(for all Divisor in 2 .. Square_Root => Test_Num rem Divisor /= 0)then
+         TIO.Put_Line ("Prime Found: " & Integer'Image (Test_Num));
+      end if;
+   end loop;
+
+end Main;

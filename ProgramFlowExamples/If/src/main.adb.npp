@@ -1,0 +1,14 @@
+with Ada.Text_IO;
+
+procedure Main is
+   package TIO renames Ada.Text_IO;
+   type Suit is (Clubs, Diamonds, Hearts, Spades, No_Trumps);
+   Bid_Suit : Suit := Clubs;
+   type Suit_Color is (None, Red, Black);
+   Bid_Color : Suit_Color := None;
+begin
+
+   Bid_Suit := (if Bid_Suit = No_Trumps then Clubs else Suit'Succ(Bid_Suit));
+TIO.Put (Suit_Color'Image(Bid_Color));
+
+end Main;

@@ -1,0 +1,71 @@
+with Ada.Text_IO;
+
+procedure Main is
+   package TIO renames Ada.Text_IO;
+   package IIO is new Ada.Text_IO.Integer_IO (Integer);
+   type Suit is (Clubs, Diamonds, Hearts, Spades, No_Trumps);
+   subtype Poker_Suit is Suit range Clubs .. Spades;
+   subtype Minor_Suit is Suit range Clubs .. Diamonds;
+   subtype Major_Suit is Suit range Hearts .. Spades;
+   Bid_Suit : Suit := Clubs;
+   Points   : Integer;
+   Mult : Integer;
+   Doubled : Boolean;
+   Vulnerable : Boolean;
+   Under : Integer;
+   Penalty : Integer;
+
+
+begin
+      case Bid_Suit is
+      when Minor_Suit =>
+         Points := 20;
+      when Major_Suit =>
+         Points := 30;
+      when No_Trumps =>
+         Points := 40;
+   end case;
+   IIO.Put(Points); TIO.New_Line;
+
+   Points :=
+     (case Bid_Suit is
+        when Minor_Suit => 20,
+        when Major_Suit => 30,
+        when No_Trumps  => 40);
+   --when others     =>  40);
+   IIO.Put(Points); TIO.New_Line;
+
+   Bid_Suit := Hearts;
+   case Bid_Suit is
+      when Poker_Suit range Clubs .. Diamonds =>
+         Points := 20;
+      when Major_Suit =>
+         Points := 30;
+      when others =>
+         Points := 40;
+   end case;
+   IIO.Put(Points); TIO.New_Line;
+
+
+   case Doubled is
+   when True =>
+      case Vulnerable is
+         when True => Mult := 8;
+         when False => Mult := 4;
+         when others => TIO.Put_Line("Houston we have a problem.");
+      end case;
+      when False =>
+            case not Vulnerable is
+         when True => Mult := 3;
+         when False => Mult := 2;
+         when others => TIO.Put_Line("Houston we have a problem.");
+         end case;
+         when others => TIO.Put_Line("Houston we have a problem.");
+   end case;
+--     Penalty := ( case Doubled is
+--                      True => 1,
+--                      when 30 => 2,
+--                      when 40 => 3,
+--                   when others => 0);
+--
+end Main;

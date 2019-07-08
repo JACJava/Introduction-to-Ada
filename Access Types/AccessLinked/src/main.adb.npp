@@ -1,0 +1,19 @@
+with Ada.Text_IO;
+
+procedure Main is
+
+   package TIO renames Ada.Text_IO;
+   package IIO is new Ada.Text_IO.Integer_IO (Integer);
+   package FIO is new Ada.Text_IO.Float_IO (Float);
+
+   type Suit is (Clubs, Diamonds, Hearts, Spades);
+   type Card is record
+      Rank_Value : Integer;
+      Suit_Value : Suit;
+   end record;
+
+
+
+begin
+null;
+end Main;

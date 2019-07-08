@@ -1,0 +1,32 @@
+with Ada.Text_IO;
+with Ada.Unchecked_Deallocation;
+
+procedure Main is
+
+  package IIO is new Ada.Text_IO.Integer_IO(Integer);
+  package FIO is new Ada.Text_IO.Float_IO(Float);
+
+
+   type Int_Acc is access all Integer;
+   My_Var : aliased Integer := 42;
+   My_Int_Acc : Int_Acc;
+
+
+   type Int_Ptr is access all Integer;
+   I : aliased Integer :=6;
+   I_Ptr : Int_Ptr;
+
+   type Float_Acc is access Float;
+   My_Float_Acc : Float_Acc;
+      procedure Delete_Float is new Ada.Unchecked_Deallocation(Float, Float_Acc);
+begin
+   My_Float_Acc := new Float;
+   Delete_Float(My_Float_Acc);
+   My_Float_Acc := new Float'(30.0);
+
+  My_Int_Acc := My_Var'Access;
+  IIO.Put (My_Int_Acc.all);
+  FIO.Put(My_Float_Acc.all);
+
+
+end Main;

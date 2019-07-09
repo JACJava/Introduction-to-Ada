@@ -1,0 +1,12 @@
+project Hailstone is
+
+   for Source_Dirs use ("src");
+   for Object_Dir use "obj";
+   for Main use ("main.adb");
+
+   package Pretty_Printer is
+      for Default_Switches ("ada") use ("-M97", "--no-separate-is", "--use-on-new-line");
+   end Pretty_Printer;
+
+end Hailstone;
+

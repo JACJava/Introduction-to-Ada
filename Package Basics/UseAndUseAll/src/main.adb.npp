@@ -1,0 +1,8 @@
+with Ada.Text_IO;
+with Cards;
+
+procedure Main is
+A_Card : Cards.Card := Cards.Make(1, Cards.Clubs);
+begin
+   Cards.Display(A_Card);
+end Main;

@@ -44,7 +44,7 @@ begin
 
  Bid_Suit := Clubs; --reinitialize value
 
- --  yet another way to format with the if stmt all on a single line
+ --  yet another way to format with the if statement all on a single line
  if Bid_Suit = No_Trumps then Bid_Suit := Clubs; else Bid_Suit := Suit'Succ(Bid_Suit); end if;
 
  TIO.Put_Line("If Statement Three Result:  " & Suit'Image(Bid_Suit));
